@@ -20,35 +20,17 @@
             },
             colors: {
               agila: {
-                gold: '#D4A574',
-                orange: '#E67E22',
-                dark: '#1A1A1A',
-                light: '#F5F5F5',
+                gold: '#D97706',
+                orange: '#F97316',
+                dark: '#0F172A',
+                panel: '#1E293B',
               },
               haribon: {
-                midnight: '#0F1419',
-                steel: '#2A3441',
-                silver: '#C0C0C0',
-                accent: '#4A90E2',
-              },
-            },
-            animation: {
-              float: 'float 6s ease-in-out infinite',
-              'slide-up': 'slideUp 0.8s ease-out forwards',
-              reveal: 'reveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards',
-            },
-            keyframes: {
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-20px)' },
-              },
-              slideUp: {
-                '0%': { transform: 'translateY(100px)', opacity: '0' },
-                '100%': { transform: 'translateY(0)', opacity: '1' },
-              },
-              reveal: {
-                '0%': { transform: 'translateY(50px)', opacity: '0' },
-                '100%': { transform: 'translateY(0)', opacity: '1' },
+                midnight: '#020617',
+                steel: '#1E293B',
+                silver: '#94A3B8',
+                cyan: '#06B6D4',
+                red: '#DC2626',
               },
             },
           },
@@ -56,35 +38,47 @@
       };
     </script>
     <style>
-      .glass-panel {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
+      .spec-card {
+        background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
         border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
-      .split-text {
-        background: linear-gradient(90deg, #d4a574 50%, #c0c0c0 50%);
+      .spec-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(249, 115, 22, 0.5);
+        box-shadow: 0 20px 40px -15px rgba(249, 115, 22, 0.2);
+      }
+      .haribon-card:hover {
+        border-color: rgba(6, 182, 212, 0.5);
+        box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.2);
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #f97316 0%, #d97706 50%, #94a3b8 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        background-clip: text;
       }
-      .engineering-grid {
+      .grid-bg {
         background-image:
           linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-        background-size: 50px 50px;
+        background-size: 40px 40px;
       }
-      .hover-lift {
-        transition:
-          transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-          box-shadow 0.3s ease;
+      .capped-badge {
+        background: linear-gradient(90deg, rgba(220, 38, 38, 0.2), rgba(220, 38, 38, 0.1));
+        border: 1px solid rgba(220, 38, 38, 0.3);
       }
-      .hover-lift:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      .volume-badge {
+        background: linear-gradient(90deg, rgba(6, 182, 212, 0.2), rgba(6, 182, 212, 0.1));
+        border: 1px solid rgba(6, 182, 212, 0.3);
+      }
+      .plant-tag {
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
       }
       .scroll-reveal {
         opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
       }
       .scroll-reveal.active {
         opacity: 1;
@@ -92,195 +86,175 @@
       }
     </style>
   </head>
-  <body class="bg-agila-dark text-white overflow-x-hidden font-sans">
+  <body class="bg-agila-dark text-slate-200 font-sans antialiased">
     <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b border-transparent">
+    <nav class="fixed w-full z-50 bg-agila-dark/90 backdrop-blur-md border-b border-white/10 transition-all duration-300" id="navbar">
       <div class="max-w-7xl mx-auto px-6 py-4">
         <div class="flex justify-between items-center">
-          <div class="flex items-center gap-3 group cursor-pointer" onclick="window.scrollTo(0, 0)">
-            <div
-              class="w-10 h-10 bg-gradient-to-br from-agila-gold to-agila-orange rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform"
-            >
+          <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0, 0)">
+            <div class="w-10 h-10 bg-gradient-to-br from-agila-orange to-agila-gold rounded-lg flex items-center justify-center">
               <i data-lucide="wing" class="w-6 h-6 text-white"></i>
             </div>
             <div>
-              <h1 class="font-display font-bold text-xl tracking-tighter">AGILA</h1>
-              <p class="text-[10px] uppercase tracking-[0.3em] text-gray-400">Automotive Group</p>
+              <h1 class="font-display font-bold text-xl tracking-tight text-white">AGILA</h1>
+              <p class="text-[10px] uppercase tracking-[0.2em] text-slate-400">Automotive Group</p>
             </div>
           </div>
 
           <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-            <button onclick="scrollToSection('philosophy')" class="hover:text-agila-gold transition-colors">Dual-Track Philosophy</button>
-            <button onclick="scrollToSection('agila-core')" class="hover:text-agila-gold transition-colors">Agila Core</button>
-            <button onclick="scrollToSection('haribon')" class="hover:text-haribon-silver transition-colors">Haribon Performance</button>
-            <button onclick="scrollToSection('nest')" class="hover:text-haribon-accent transition-colors">Haribon Nest</button>
-            <button
-              onclick="scrollToSection('engineering')"
-              class="px-4 py-2 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all"
-            >
-              Engineering Flow
-            </button>
+            <button onclick="scrollToSection('philosophy')" class="hover:text-agila-orange transition-colors">Dual-Track</button>
+            <button onclick="scrollToSection('agila-core')" class="hover:text-agila-orange transition-colors">AGILA Core</button>
+            <button onclick="scrollToSection('haribon')" class="hover:text-haribon-cyan transition-colors">Haribon Performance</button>
+            <button onclick="scrollToSection('manufacturing')" class="hover:text-agila-gold transition-colors">Plants & Engineering</button>
           </div>
 
-          <button class="md:hidden" onclick="toggleMobileMenu()">
+          <button class="md:hidden text-white" onclick="toggleMobile()">
             <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
         </div>
       </div>
 
       <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden bg-agila-dark border-t border-white/10 absolute w-full">
-        <div class="px-6 py-4 space-y-4">
-          <button onclick="scrollToSection('philosophy')" class="block w-full text-left py-2">Philosophy</button>
-          <button onclick="scrollToSection('agila-core')" class="block w-full text-left py-2">Agila Core</button>
-          <button onclick="scrollToSection('haribon')" class="block w-full text-left py-2">Haribon</button>
-          <button onclick="scrollToSection('nest')" class="block w-full text-left py-2">The Nest</button>
+      <div id="mobile-menu" class="hidden md:hidden bg-agila-panel border-t border-white/10">
+        <div class="px-6 py-4 space-y-3">
+          <button onclick="scrollToSection('philosophy')" class="block w-full text-left py-2 text-sm">Dual-Track Philosophy</button>
+          <button onclick="scrollToSection('agila-core')" class="block w-full text-left py-2 text-sm">AGILA Core Lineup</button>
+          <button onclick="scrollToSection('haribon')" class="block w-full text-left py-2 text-sm">Haribon Performance</button>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden engineering-grid">
-      <div class="absolute inset-0 bg-gradient-to-br from-agila-dark via-agila-dark to-haribon-midnight opacity-90"></div>
+    <section class="relative min-h-screen flex items-center justify-center grid-bg overflow-hidden pt-20">
+      <div class="absolute inset-0 bg-gradient-to-b from-agila-dark via-agila-dark/95 to-haribon-midnight"></div>
 
-      <!-- Animated Background Elements -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-agila-gold/10 rounded-full blur-3xl animate-float"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
         <div
-          class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-haribon-accent/10 rounded-full blur-3xl animate-float"
-          style="animation-delay: 3s"
-        ></div>
-      </div>
-
-      <div class="relative z-10 max-w-7xl mx-auto px-6 pt-20 text-center">
-        <div class="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs uppercase tracking-[0.2em] text-agila-gold">
-          <span class="w-2 h-2 bg-agila-gold rounded-full animate-pulse"></span>
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs uppercase tracking-[0.2em] text-agila-orange mb-8 scroll-reveal"
+        >
+          <span class="w-2 h-2 bg-agila-orange rounded-full animate-pulse"></span>
           Filipino Engineering, Global Ambition
         </div>
 
-        <h1 class="font-display text-5xl md:text-8xl font-bold mb-8 leading-tight">
-          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-agila-gold via-white to-haribon-silver">Two Tracks.</span>
-          <span class="block text-3xl md:text-6xl font-light mt-4 text-gray-300">One Uncompromising Vision.</span>
+        <h1 class="font-display text-5xl md:text-7xl font-bold mb-6 leading-tight scroll-reveal">
+          <span class="block text-white">From Bustos to</span>
+          <span class="gradient-text">Global Excellence</span>
         </h1>
 
-        <p class="max-w-2xl mx-auto text-gray-400 text-lg md:text-xl mb-12 leading-relaxed">
-          Where volume excellence funds pinnacle achievement. From accessible mobility for every Filipino family to the apex of performance
-          engineering.
+        <p class="max-w-3xl mx-auto text-slate-400 text-lg md:text-xl mb-12 leading-relaxed scroll-reveal">
+          Dual-track manufacturing from high-volume accessibility at Bustos Plant to capped-performance mastery at Haribon Center, Clark.
         </p>
 
-        <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+        <div class="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-16 scroll-reveal">
+          <div class="bg-white/5 border border-white/10 p-6 rounded-xl text-left backdrop-blur-sm">
+            <div class="text-3xl font-display font-bold text-agila-orange mb-1">₱399K</div>
+            <div class="text-xs uppercase tracking-wider text-slate-500">Starting at (Kalesa)</div>
+            <div class="text-xs text-slate-600 mt-2">Bustos Plant</div>
+          </div>
+          <div class="bg-white/5 border border-white/10 p-6 rounded-xl text-left backdrop-blur-sm">
+            <div class="text-3xl font-display font-bold text-haribon-cyan mb-1">₱30M</div>
+            <div class="text-xs uppercase tracking-wider text-slate-500">AGILA MK2</div>
+            <div class="text-xs text-slate-600 mt-2">Haribon Center</div>
+          </div>
+          <div class="bg-white/5 border border-white/10 p-6 rounded-xl text-left backdrop-blur-sm">
+            <div class="text-3xl font-display font-bold text-white mb-1">4 Plants</div>
+            <div class="text-xs uppercase tracking-wider text-slate-500">Integrated Manufacturing</div>
+            <div class="text-xs text-slate-600 mt-2">Bulacan & Clark</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center scroll-reveal">
           <button
             onclick="scrollToSection('agila-core')"
-            class="group px-8 py-4 bg-agila-gold text-agila-dark font-bold rounded-lg hover:bg-agila-orange transition-all flex items-center gap-2 hover-lift"
+            class="px-8 py-4 bg-agila-orange text-white font-bold rounded-lg hover:bg-agila-gold transition-all flex items-center justify-center gap-2"
           >
-            Explore Agila Core
-            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+            Explore Core Lineup
+            <i data-lucide="arrow-down" class="w-4 h-4"></i>
           </button>
           <button
             onclick="scrollToSection('haribon')"
-            class="group px-8 py-4 border border-haribon-silver text-haribon-silver rounded-lg hover:bg-haribon-silver hover:text-haribon-midnight transition-all flex items-center gap-2 hover-lift"
+            class="px-8 py-4 bg-transparent border border-haribon-cyan text-haribon-cyan font-bold rounded-lg hover:bg-haribon-cyan/10 transition-all flex items-center justify-center gap-2"
           >
-            Discover Haribon
-            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            View Haribon Performance
+            <i data-lucide="zap" class="w-4 h-4"></i>
           </button>
         </div>
-
-        <!-- Dual Track Indicator -->
-        <div class="mt-20 grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-          <div class="glass-panel p-6 rounded-2xl border-l-4 border-agila-gold text-left scroll-reveal">
-            <div class="flex items-center gap-3 mb-2">
-              <i data-lucide="users" class="w-5 h-5 text-agila-gold"></i>
-              <span class="text-agila-gold font-bold uppercase tracking-wider text-sm">Volume Excellence</span>
-            </div>
-            <p class="text-gray-400 text-sm">Capital for Creation</p>
-          </div>
-          <div class="glass-panel p-6 rounded-2xl border-r-4 border-haribon-silver text-left md:text-right scroll-reveal">
-            <div class="flex items-center gap-3 mb-2 md:justify-end">
-              <span class="text-haribon-silver font-bold uppercase tracking-wider text-sm">Pinnacle Achievement</span>
-              <i data-lucide="mountain" class="w-5 h-5 text-haribon-silver"></i>
-            </div>
-            <p class="text-gray-400 text-sm">Engineering as Art</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <i data-lucide="chevron-down" class="w-6 h-6 text-white/50"></i>
       </div>
     </section>
 
-    <!-- Philosophy Section -->
-    <section id="philosophy" class="py-32 relative bg-gradient-to-b from-agila-dark to-haribon-midnight">
+    <!-- Philosophy -->
+    <section id="philosophy" class="py-24 bg-slate-900 border-y border-white/5">
       <div class="max-w-7xl mx-auto px-6">
         <div class="grid md:grid-cols-2 gap-16 items-center">
           <div class="scroll-reveal">
-            <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
-              The Dual-Track
-              <br />
-              Strategy
-            </h2>
-            <p class="text-gray-400 text-lg mb-8 leading-relaxed">
-              We operate on a unique philosophy where volume excellence funds and inspires pinnacle achievement. Agila Core generates the capital and
-              market trust that allows Haribon to push the boundaries of engineering as art.
+            <h2 class="font-display text-4xl font-bold mb-6 text-white">Capital Funds Creation</h2>
+            <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+              High-volume production at Bustos Plant (Kalesa, GALAW II, Kilos Platform) generates the capital necessary for Haribon's capped-volume
+              performance engineering at Clark.
             </p>
 
             <div class="space-y-6">
-              <div class="flex gap-4 items-start group">
-                <div
-                  class="w-12 h-12 rounded-full bg-agila-gold/20 flex items-center justify-center flex-shrink-0 group-hover:bg-agila-gold/30 transition-colors"
-                >
-                  <span class="text-agila-gold font-bold">01</span>
+              <div class="flex gap-4 items-start">
+                <div class="w-12 h-12 rounded-lg bg-agila-orange/20 flex items-center justify-center flex-shrink-0 text-agila-orange font-bold">
+                  01
                 </div>
                 <div>
-                  <h3 class="font-bold text-lg mb-1 text-agila-gold">Capital Generation</h3>
-                  <p class="text-gray-400 text-sm">Volume models fund innovation and passion projects without compromise.</p>
+                  <h3 class="font-bold text-white mb-1">Volume Excellence</h3>
+                  <p class="text-sm text-slate-500">
+                    Bustos Plant: Kalesa, GALAW II, Kilos Platform. PUSO3 & PUSO4 engine families. High automation.
+                  </p>
                 </div>
               </div>
-              <div class="flex gap-4 items-start group">
-                <div
-                  class="w-12 h-12 rounded-full bg-haribon-silver/20 flex items-center justify-center flex-shrink-0 group-hover:bg-haribon-silver/30 transition-colors"
-                >
-                  <span class="text-haribon-silver font-bold">02</span>
+              <div class="flex gap-4 items-start">
+                <div class="w-12 h-12 rounded-lg bg-haribon-cyan/20 flex items-center justify-center flex-shrink-0 text-haribon-cyan font-bold">
+                  02
                 </div>
                 <div>
-                  <h3 class="font-bold text-lg mb-1 text-haribon-silver">Technology Trickles Down</h3>
-                  <p class="text-gray-400 text-sm">Cutting-edge innovations from Haribon eventually enhance future Core models.</p>
+                  <h3 class="font-bold text-white mb-1">Technology Transfer</h3>
+                  <p class="text-sm text-slate-500">
+                    Tatag T4-T and Anim AS6TT33 engineering from low-volume Core models informs Haribon KIDLAT and DANGAL architectures.
+                  </p>
                 </div>
               </div>
-              <div class="flex gap-4 items-start group">
-                <div
-                  class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-colors"
-                >
-                  <span class="text-white font-bold">03</span>
-                </div>
+              <div class="flex gap-4 items-start">
+                <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center flex-shrink-0 text-purple-400 font-bold">03</div>
                 <div>
-                  <h3 class="font-bold text-lg mb-1">Brand Elevation</h3>
-                  <p class="text-gray-400 text-sm">The halo effect of Haribon pulls the entire Agila brand upward.</p>
+                  <h3 class="font-bold text-white mb-1">Global RHD/LHD</h3>
+                  <p class="text-sm text-slate-500">Lakan II (15% RHD) and Sagwan S2 (30% RHD) prove Philippine engineering for global markets.</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="relative scroll-reveal">
-            <div class="absolute inset-0 bg-gradient-to-r from-agila-gold/20 to-haribon-accent/20 rounded-3xl blur-3xl"></div>
-            <div class="relative glass-panel rounded-3xl p-8 border border-white/10">
-              <div class="grid grid-cols-2 gap-4">
-                <div class="bg-agila-dark/50 p-6 rounded-2xl border border-agila-gold/30 hover:border-agila-gold transition-colors">
-                  <i data-lucide="trending-up" class="w-8 h-8 text-agila-gold mb-4"></i>
-                  <div class="text-3xl font-display font-bold mb-1">Volume</div>
-                  <div class="text-xs uppercase tracking-wider text-gray-500">Market Leadership</div>
+            <div class="absolute inset-0 bg-gradient-to-r from-agila-orange/20 to-haribon-cyan/20 rounded-2xl blur-3xl"></div>
+            <div class="relative bg-slate-800/50 border border-white/10 rounded-2xl p-8 backdrop-blur-sm">
+              <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+                <span class="text-agila-orange font-bold uppercase tracking-wider text-sm">AGILA Core</span>
+                <i data-lucide="arrow-right" class="w-4 h-4 text-slate-600"></i>
+                <span class="text-haribon-cyan font-bold uppercase tracking-wider text-sm">Haribon</span>
+              </div>
+
+              <div class="space-y-4 text-sm">
+                <div class="flex justify-between items-center py-2 border-b border-white/5">
+                  <span class="text-slate-400">Kalesa (₱399K)</span>
+                  <span class="text-slate-600">→</span>
+                  <span class="text-slate-400">Sagwan S2 (₱1.3M)</span>
                 </div>
-                <div class="bg-haribon-steel/50 p-6 rounded-2xl border border-haribon-silver/30 hover:border-haribon-silver transition-colors">
-                  <i data-lucide="zap" class="w-8 h-8 text-haribon-silver mb-4"></i>
-                  <div class="text-3xl font-display font-bold mb-1">Halo</div>
-                  <div class="text-xs uppercase tracking-wider text-gray-500">Performance</div>
+                <div class="flex justify-between items-center py-2 border-b border-white/5">
+                  <span class="text-slate-400">Ginoo II (₱1.1M)</span>
+                  <span class="text-slate-600">→</span>
+                  <span class="text-slate-400">Habagat (₱1.5M)</span>
                 </div>
-                <div class="col-span-2 bg-gradient-to-r from-agila-gold/10 to-haribon-silver/10 p-6 rounded-2xl border border-white/10 text-center">
-                  <p class="font-display text-xl italic">
-                    "Core funds the dream;
-                    <br />
-                    Halo pulls the brand upward."
-                  </p>
+                <div class="flex justify-between items-center py-2 border-b border-white/5">
+                  <span class="text-slate-400">Lakan II (₱2.9M)</span>
+                  <span class="text-slate-600">→</span>
+                  <span class="text-slate-400">Matimtiman (₱5.5M)</span>
+                </div>
+                <div class="flex justify-between items-center py-2 text-agila-gold font-bold">
+                  <span>Volume Engineering</span>
+                  <i data-lucide="repeat" class="w-4 h-4"></i>
+                  <span>Halo Performance</span>
                 </div>
               </div>
             </div>
@@ -289,321 +263,511 @@
       </div>
     </section>
 
-    <!-- Agila Core Section -->
-    <section id="agila-core" class="py-32 bg-agila-light text-agila-dark relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-orange-100/50 to-transparent"></div>
-
-      <div class="max-w-7xl mx-auto px-6 relative z-10">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
+    <!-- AGILA Core Lineup -->
+    <section id="agila-core" class="py-24 bg-slate-950">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
           <div class="scroll-reveal">
-            <div class="inline-flex items-center gap-2 text-agila-orange font-bold uppercase tracking-wider text-sm mb-4">
-              <span class="w-8 h-[2px] bg-agila-orange"></span>
-              The Heart of ASEAN Mobility
-            </div>
-            <h2 class="font-display text-5xl md:text-7xl font-bold mb-4 text-agila-dark">AGILA CORE</h2>
-            <p class="max-w-xl text-gray-600 text-lg">
-              Accessible, reliable, and high-value mobility solutions for Filipino families and businesses.
-            </p>
+            <div class="text-agila-orange font-bold uppercase tracking-wider text-sm mb-2">The Core Lineup</div>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white">AGILA Core</h2>
+            <p class="text-slate-400 mt-2">From Bustos high-volume to Bulacan specialty manufacturing</p>
           </div>
-          <div class="mt-6 md:mt-0 scroll-reveal">
-            <button class="px-6 py-3 bg-agila-dark text-white rounded-lg hover:bg-agila-orange transition-colors flex items-center gap-2">
-              View Core Models
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
+
+          <div class="flex gap-2 scroll-reveal">
+            <span class="px-3 py-1 rounded-full text-xs font-medium volume-badge text-cyan-400">High-Volume</span>
+            <span class="px-3 py-1 rounded-full text-xs font-medium bg-white/10 text-slate-300">Low-Volume</span>
           </div>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 scroll-reveal">
-            <div
-              class="w-14 h-14 bg-agila-orange/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-agila-orange group-hover:text-white transition-colors text-agila-orange"
-            >
-              <i data-lucide="wallet" class="w-7 h-7"></i>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- High Volume Models -->
+          <div class="spec-card rounded-2xl p-6 scroll-reveal group relative overflow-hidden">
+            <div class="absolute top-4 right-4">
+              <span class="plant-tag px-2 py-1 rounded bg-cyan-950 text-cyan-400">Bustos Plant</span>
             </div>
-            <h3 class="font-display text-2xl font-bold mb-3">Unbeatable Value</h3>
-            <p class="text-gray-600 leading-relaxed">Making vehicle ownership a catalyst for progress without compromising quality or safety.</p>
+            <div class="mb-4">
+              <h3 class="font-display text-2xl font-bold text-white mb-1">Kalesa</h3>
+              <p class="text-xs text-slate-500 uppercase tracking-wider">Entry Mobility</p>
+            </div>
+            <div class="space-y-3 mb-6">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-agila-orange font-mono">PUSO3 P3T</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Variants</span>
+                <span class="text-slate-300">B, GT</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Price</span>
+                <span class="text-white font-bold">₱399K - ₱499K</span>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex justify-between items-center">
+              <span class="text-xs text-cyan-400 font-medium">HIGH-VOLUME</span>
+              <button class="text-agila-orange hover:text-white transition-colors"><i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+            </div>
           </div>
 
-          <div
-            class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 scroll-reveal"
-            style="animation-delay: 0.1s"
-          >
-            <div
-              class="w-14 h-14 bg-agila-orange/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-agila-orange group-hover:text-white transition-colors text-agila-orange"
-            >
-              <i data-lucide="shield" class="w-7 h-7"></i>
+          <div class="spec-card rounded-2xl p-6 scroll-reveal group relative overflow-hidden">
+            <div class="absolute top-4 right-4">
+              <span class="plant-tag px-2 py-1 rounded bg-cyan-950 text-cyan-400">Bustos Plant</span>
             </div>
-            <h3 class="font-display text-2xl font-bold mb-3">Filipino Toughness</h3>
-            <p class="text-gray-600 leading-relaxed">Built for Philippine roads and conditions. Robust engineering that lasts generations.</p>
+            <div class="mb-4">
+              <h3 class="font-display text-2xl font-bold text-white mb-1">GALAW II</h3>
+              <p class="text-xs text-slate-500 uppercase tracking-wider">Compact MPV</p>
+            </div>
+            <div class="space-y-3 mb-6">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-agila-orange font-mono">PUSO4 P4T18</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Variants</span>
+                <span class="text-slate-300">S II, Grand II</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Price</span>
+                <span class="text-white font-bold">₱848K - ₱899K</span>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex justify-between items-center">
+              <span class="text-xs text-cyan-400 font-medium">HIGH-VOLUME</span>
+              <span class="text-xs text-slate-600">Replaces Gen I</span>
+            </div>
           </div>
 
-          <div
-            class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 scroll-reveal"
-            style="animation-delay: 0.2s"
-          >
-            <div
-              class="w-14 h-14 bg-agila-orange/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-agila-orange group-hover:text-white transition-colors text-agila-orange"
-            >
-              <i data-lucide="cpu" class="w-7 h-7"></i>
+          <!-- Kilos Platform Family -->
+          <div class="spec-card rounded-2xl p-6 scroll-reveal border-l-4 border-l-agila-orange relative">
+            <div class="absolute top-4 right-4">
+              <span class="plant-tag px-2 py-1 rounded bg-cyan-950 text-cyan-400">Bustos Plant</span>
             </div>
-            <h3 class="font-display text-2xl font-bold mb-3">Smart Engineering</h3>
-            <p class="text-gray-600 leading-relaxed">Intelligent design meets efficient platforms. Technology that serves real needs.</p>
+            <div class="mb-4">
+              <h3 class="font-display text-2xl font-bold text-white mb-1">Kilos Platform</h3>
+              <p class="text-xs text-slate-500 uppercase tracking-wider">Utility Series</p>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between text-sm py-1 border-b border-white/5">
+                <span class="text-slate-400">Lakbay Mini</span>
+                <span class="text-agila-gold">₱569K</span>
+              </div>
+              <div class="flex justify-between text-sm py-1 border-b border-white/5">
+                <span class="text-slate-400">Karga</span>
+                <span class="text-agila-gold">₱522K</span>
+              </div>
+              <div class="flex justify-between text-sm py-1">
+                <span class="text-slate-400">Dala</span>
+                <span class="text-agila-gold">₱539K</span>
+              </div>
+            </div>
+            <div class="text-xs text-slate-500 mt-2">Shared PUSO3 P3T architecture</div>
           </div>
-        </div>
 
-        <!-- Stats -->
-        <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-300 pt-12 scroll-reveal">
-          <div>
-            <div class="text-4xl font-display font-bold text-agila-orange mb-1">100K+</div>
-            <div class="text-sm text-gray-600 uppercase tracking-wider">Families Served</div>
+          <!-- Volume Models -->
+          <div class="spec-card rounded-2xl p-6 scroll-reveal">
+            <div class="absolute top-4 right-4">
+              <span class="plant-tag px-2 py-1 rounded bg-slate-800 text-slate-400">Bulacan Main</span>
+            </div>
+            <div class="mb-4 mt-6">
+              <h3 class="font-display text-2xl font-bold text-white mb-1">Sentro II</h3>
+              <p class="text-xs text-slate-500 uppercase tracking-wider">Compact Sedan</p>
+            </div>
+            <div class="space-y-3 mb-6">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-slate-300 text-xs">P4T18 / K4T-E / P4HARI</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Variants</span>
+                <span class="text-slate-300">E, GT, HARI</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Price</span>
+                <span class="text-white font-bold">₱599K - ₱899K</span>
+              </div>
+            </div>
           </div>
-          <div>
-            <div class="text-4xl font-display font-bold text-agila-orange mb-1">15</div>
-            <div class="text-sm text-gray-600 uppercase tracking-wider">Dealer Networks</div>
+
+          <div class="spec-card rounded-2xl p-6 scroll-reveal">
+            <div class="mb-4">
+              <h3 class="font-display text-2xl font-bold text-white mb-1">Ginoo II</h3>
+              <p class="text-xs text-slate-500 uppercase tracking-wider">Premium MPV</p>
+            </div>
+            <div class="space-y-3 mb-6">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-agila-orange font-mono">Tatag T4-T</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Price</span>
+                <span class="text-white font-bold">₱1.1M - ₱1.8M</span>
+              </div>
+            </div>
+            <div class="text-xs text-slate-600">Replaces Gen I (Inventory clearing)</div>
           </div>
-          <div>
-            <div class="text-4xl font-display font-bold text-agila-orange mb-1">98%</div>
-            <div class="text-sm text-gray-600 uppercase tracking-wider">Customer Satisfaction</div>
+
+          <div class="spec-card rounded-2xl p-6 scroll-reveal">
+            <div class="mb-4">
+              <h3 class="font-display text-2xl font-bold text-white mb-1">Bagani II</h3>
+              <p class="text-xs text-slate-500 uppercase tracking-wider">Commercial/Utility</p>
+            </div>
+            <div class="space-y-3 mb-6">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-agila-orange font-mono">Tatag T4-T</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Variants</span>
+                <span class="text-slate-300">Work, Touring, GT</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Price</span>
+                <span class="text-white font-bold">₱799K - ₱1.3M</span>
+              </div>
+            </div>
           </div>
-          <div>
-            <div class="text-4xl font-display font-bold text-agila-orange mb-1">5yr</div>
-            <div class="text-sm text-gray-600 uppercase tracking-wider">Warranty Standard</div>
+
+          <!-- Low Volume Core -->
+          <div class="spec-card rounded-2xl p-6 scroll-reveal border border-white/20">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3 class="font-display text-2xl font-bold text-white mb-1">Lakbay II</h3>
+                <p class="text-xs text-slate-500 uppercase tracking-wider">Adventure SUV</p>
+              </div>
+              <span class="volume-badge text-cyan-400 text-[10px] px-2 py-1 rounded">LOW-VOLUME</span>
+            </div>
+            <div class="space-y-3 mb-6">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-slate-300 text-xs">Lima5 L5T / Anim AS6TT33</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Price</span>
+                <span class="text-white font-bold">₱1.05M - ₱1.7M</span>
+              </div>
+            </div>
+            <div class="text-xs text-slate-500 italic">Base model discontinued; spirit lives in Kilos</div>
+          </div>
+
+          <div class="spec-card rounded-2xl p-6 scroll-reveal border border-white/20 col-span-1 md:col-span-2 lg:col-span-1">
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <h3 class="font-display text-2xl font-bold text-white mb-1">Lakan II</h3>
+                <p class="text-xs text-slate-500 uppercase tracking-wider">Flagship SUV</p>
+              </div>
+              <span class="volume-badge text-cyan-400 text-[10px] px-2 py-1 rounded">LOW-VOLUME</span>
+            </div>
+            <div class="space-y-3 mb-4">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-agila-orange font-mono">O8-TT</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Site</span>
+                <span class="text-slate-300">San Rafael Plant</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Price</span>
+                <span class="text-white font-bold">₱2.9M - ₱3.3M</span>
+              </div>
+            </div>
+            <div class="bg-white/5 rounded p-2 text-[10px] text-slate-400 flex justify-between">
+              <span>500 unit cap</span>
+              <span>15% RHD Export</span>
+              <span>10AT/6MT</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Haribon Section -->
-    <section id="haribon" class="py-32 bg-haribon-midnight relative overflow-hidden">
-      <div class="absolute inset-0 engineering-grid opacity-30"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-haribon-accent/5 rounded-full blur-3xl"></div>
+    <section id="haribon" class="py-24 bg-haribon-midnight relative overflow-hidden">
+      <div class="absolute inset-0 grid-bg opacity-20"></div>
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-haribon-cyan/50 to-transparent"></div>
 
       <div class="max-w-7xl mx-auto px-6 relative z-10">
-        <div class="text-center mb-20 scroll-reveal">
-          <div class="inline-flex items-center gap-2 text-haribon-silver font-bold uppercase tracking-wider text-sm mb-4">
-            <i data-lucide="sparkles" class="w-4 h-4"></i>
-            Engineering as Art
+        <div class="text-center mb-16 scroll-reveal">
+          <span class="text-haribon-cyan font-bold uppercase tracking-wider text-sm mb-2 block">Haribon Center, Clark</span>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">Haribon Performance</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto">Capped-volume production. Global specification with RHD variants. Engineering as art.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <!-- Sagwan S2 -->
+          <div class="haribon-card spec-card rounded-2xl p-8 scroll-reveal relative border-haribon-cyan/30">
+            <div class="absolute top-4 right-4 flex flex-col gap-2 items-end">
+              <span class="capped-badge text-red-400 text-[10px] px-3 py-1 rounded-full font-bold">CAP: 1000/yr</span>
+              <span class="bg-haribon-cyan/20 text-haribon-cyan text-[10px] px-2 py-1 rounded">70% LHD / 30% RHD</span>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-display text-3xl font-bold text-white mb-2">Sagwan S2</h3>
+              <p class="text-haribon-silver uppercase tracking-widest text-xs">Performance Coupe</p>
+            </div>
+
+            <div class="space-y-4 mb-8">
+              <div class="flex justify-between items-center py-2 border-b border-white/10">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-haribon-cyan font-mono font-bold">KIDLAT K4T-S</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-white/10">
+                <span class="text-slate-500">Transmission</span>
+                <span class="text-white">6MT Only</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-white/10">
+                <span class="text-slate-500">Site</span>
+                <span class="text-slate-300 text-xs">Haribon Center (Clark)</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-slate-500">Starting Price</span>
+                <span class="text-2xl font-display font-bold text-white">₱1,299,999</span>
+              </div>
+            </div>
+
+            <div class="text-xs text-slate-500 bg-white/5 p-3 rounded">
+              <i data-lucide="info" class="w-3 h-3 inline mr-1"></i>
+              Replaces Sagwan S1 (Production Halted)
+            </div>
           </div>
-          <h2 class="font-display text-5xl md:text-7xl font-bold mb-6 text-white">HARIBON</h2>
-          <p class="text-haribon-silver text-xl max-w-3xl mx-auto leading-relaxed">
-            The absolute apex of Filipino engineering. Low-volume, high-precision masterpieces that deliver uncompromising performance and emotional
-            engagement.
+
+          <!-- Habagat -->
+          <div class="haribon-card spec-card rounded-2xl p-8 scroll-reveal relative border-haribon-cyan/30">
+            <div class="absolute top-4 right-4">
+              <span class="capped-badge text-red-400 text-[10px] px-3 py-1 rounded-full font-bold">CAP: 700/yr</span>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-display text-3xl font-bold text-white mb-2">Habagat</h3>
+              <p class="text-haribon-silver uppercase tracking-widest text-xs">Performance Sedan</p>
+            </div>
+
+            <div class="space-y-4 mb-8">
+              <div class="flex justify-between items-center py-2 border-b border-white/10">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-haribon-cyan font-mono font-bold">KIDLAT K4T-R</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-white/10">
+                <span class="text-slate-500">Layout</span>
+                <span class="text-white">Rear-wheel Architecture</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-slate-500">Price</span>
+                <span class="text-2xl font-display font-bold text-white">₱1,499,999</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Matimtiman -->
+          <div class="haribon-card spec-card rounded-2xl p-8 scroll-reveal relative border-purple-500/30">
+            <div class="absolute top-4 right-4">
+              <span class="capped-badge text-red-400 text-[10px] px-3 py-1 rounded-full font-bold">CAP: 500/yr</span>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-display text-3xl font-bold text-white mb-2">Matimtiman</h3>
+              <p class="text-purple-400 uppercase tracking-widest text-xs">Sanctuary Class</p>
+            </div>
+
+            <div class="space-y-4 mb-8">
+              <div class="flex justify-between items-center py-2 border-b border-white/10">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-purple-400 font-mono font-bold">HALIKI6 H6-30T</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-white/10">
+                <span class="text-slate-500">Category</span>
+                <span class="text-white">Ultra-Luxury Performance</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-slate-500">Price</span>
+                <span class="text-2xl font-display font-bold text-white">₱5,499,999</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AGILA MK2 -->
+          <div class="haribon-card spec-card rounded-2xl p-8 scroll-reveal relative bg-gradient-to-br from-slate-900 to-black border-yellow-600/50">
+            <div class="absolute top-4 right-4">
+              <span class="bg-yellow-600/20 text-yellow-500 border border-yellow-600/50 text-[10px] px-3 py-1 rounded-full font-bold">
+                BUILD COMPLETE
+              </span>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-display text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-300 mb-2">
+                AGILA MK2
+              </h3>
+              <p class="text-yellow-600/80 uppercase tracking-widest text-xs">Grand Tourer</p>
+            </div>
+
+            <div class="space-y-4 mb-8">
+              <div class="flex justify-between items-center py-2 border-b border-white/10">
+                <span class="text-slate-500">Engine</span>
+                <span class="text-yellow-500 font-mono font-bold text-lg">DANGAL D12</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-white/10">
+                <span class="text-slate-500">Configuration</span>
+                <span class="text-white">V12 Twin-Turbo</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-slate-500">Est. Price</span>
+                <span class="text-3xl font-display font-bold text-yellow-500">~₱30,000,000</span>
+              </div>
+            </div>
+
+            <button
+              class="w-full py-3 bg-yellow-600/20 hover:bg-yellow-600/30 border border-yellow-600/50 rounded-lg text-yellow-500 font-bold transition-all flex items-center justify-center gap-2"
+            >
+              <i data-lucide="crown" class="w-4 h-4"></i>
+              Inquire Privately
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-12 text-center scroll-reveal">
+          <p class="text-slate-500 text-sm max-w-2xl mx-auto">
+            <span class="text-haribon-cyan">Global Specification:</span>
+            Haribon models are engineered for both LHD and RHD markets, with specific allocation ratios ensuring Philippine engineering excellence
+            reaches worldwide markets.
           </p>
-        </div>
-
-        <!-- Feature Grid -->
-        <div class="grid md:grid-cols-3 gap-8 mb-20">
-          <div class="glass-panel p-8 rounded-2xl hover-lift scroll-reveal group border border-white/5 hover:border-haribon-silver/30">
-            <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl mb-6 flex items-center justify-center overflow-hidden relative">
-              <div class="absolute inset-0 bg-haribon-accent/10 group-hover:bg-haribon-accent/20 transition-colors"></div>
-              <i data-lucide="gauge" class="w-16 h-16 text-haribon-silver/50 group-hover:scale-110 transition-transform duration-500"></i>
-            </div>
-            <h3 class="font-display text-2xl font-bold mb-3 text-haribon-silver">Technological Halo</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">
-              Pioneering cutting-edge technology and materials that eventually define the future of mobility.
-            </p>
-          </div>
-
-          <div
-            class="glass-panel p-8 rounded-2xl hover-lift scroll-reveal group border border-white/5 hover:border-haribon-silver/30"
-            style="transition-delay: 0.1s"
-          >
-            <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl mb-6 flex items-center justify-center overflow-hidden relative">
-              <div class="absolute inset-0 bg-haribon-accent/10 group-hover:bg-haribon-accent/20 transition-colors"></div>
-              <i data-lucide="target" class="w-16 h-16 text-haribon-silver/50 group-hover:scale-110 transition-transform duration-500"></i>
-            </div>
-            <h3 class="font-display text-2xl font-bold mb-3 text-haribon-silver">Ultimate Driver Engagement</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">
-              Driver-centric vehicles designed for pure emotional connection and uncompromising performance.
-            </p>
-          </div>
-
-          <div
-            class="glass-panel p-8 rounded-2xl hover-lift scroll-reveal group border border-white/5 hover:border-haribon-silver/30"
-            style="transition-delay: 0.2s"
-          >
-            <div class="h-48 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl mb-6 flex items-center justify-center overflow-hidden relative">
-              <div class="absolute inset-0 bg-haribon-accent/10 group-hover:bg-haribon-accent/20 transition-colors"></div>
-              <i data-lucide="globe" class="w-16 h-16 text-haribon-silver/50 group-hover:scale-110 transition-transform duration-500"></i>
-            </div>
-            <h3 class="font-display text-2xl font-bold mb-3 text-haribon-silver">Global Brand Elevation</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">
-              Establishing Filipino engineering on the world stage as a respected and desired performance marque.
-            </p>
-          </div>
-        </div>
-
-        <!-- Model Preview -->
-        <div class="glass-panel rounded-3xl p-8 md:p-12 border border-white/10 scroll-reveal">
-          <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div class="text-haribon-silver text-sm uppercase tracking-[0.3em] mb-4">Latest Masterpiece</div>
-              <h3 class="font-display text-4xl md:text-5xl font-bold mb-6">Haribon Series I</h3>
-              <p class="text-gray-400 mb-8 leading-relaxed">
-                Hand-assembled by our master craftsmen. Limited to 50 units annually. Each vehicle represents the pinnacle of Philippine automotive
-                artistry.
-              </p>
-              <div class="flex gap-6 text-sm">
-                <div>
-                  <div class="text-2xl font-bold text-white">0-100</div>
-                  <div class="text-gray-500">3.2s</div>
-                </div>
-                <div>
-                  <div class="text-2xl font-bold text-white">V8</div>
-                  <div class="text-gray-500">Twin-Turbo</div>
-                </div>
-                <div>
-                  <div class="text-2xl font-bold text-white">1 of 50</div>
-                  <div class="text-gray-500">Annual Production</div>
-                </div>
-              </div>
-            </div>
-            <div class="relative">
-              <div class="aspect-video bg-gradient-to-br from-gray-800 to-black rounded-2xl flex items-center justify-center border border-white/5">
-                <div class="text-center">
-                  <i data-lucide="image" class="w-12 h-12 text-gray-600 mx-auto mb-2"></i>
-                  <span class="text-gray-500 text-sm">[Haribon Model Rendering]</span>
-                </div>
-              </div>
-              <div class="absolute -bottom-4 -right-4 bg-haribon-accent text-white px-6 py-3 rounded-lg font-bold shadow-lg">Inquire Now</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- Haribon Nest Section -->
-    <section id="nest" class="py-32 bg-gradient-to-b from-haribon-midnight to-agila-dark relative">
-      <div class="max-w-5xl mx-auto px-6 text-center">
-        <div class="scroll-reveal mb-16">
-          <i data-lucide="crown" class="w-12 h-12 text-haribon-gold mx-auto mb-6 text-yellow-500"></i>
-          <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">The Haribon Nest</h2>
-          <p class="text-xl text-gray-400 leading-relaxed">
-            Exclusive ownership extends beyond the vehicle. Join the most engaging automotive community in the world.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6 text-left">
-          <div class="glass-panel p-8 rounded-2xl border border-white/10 hover:border-yellow-500/50 transition-colors scroll-reveal">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-500">
-                <i data-lucide="message-circle" class="w-5 h-5"></i>
-              </div>
-              <h3 class="font-bold text-lg">Direct Engineering Access</h3>
-            </div>
-            <p class="text-gray-400 text-sm">
-              Communicate directly with the engineers and designers who crafted your vehicle. Behind-the-scenes development insights.
-            </p>
-          </div>
-
-          <div class="glass-panel p-8 rounded-2xl border border-white/10 hover:border-yellow-500/50 transition-colors scroll-reveal">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-500">
-                <i data-lucide="ticket" class="w-5 h-5"></i>
-              </div>
-              <h3 class="font-bold text-lg">Exclusive Model Allocation</h3>
-            </div>
-            <p class="text-gray-400 text-sm">
-              First access to limited editions and new releases. Priority allocation for rare configurations and special series.
-            </p>
-          </div>
-
-          <div class="glass-panel p-8 rounded-2xl border border-white/10 hover:border-yellow-500/50 transition-colors scroll-reveal">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-500">
-                <i data-lucide="calendar" class="w-5 h-5"></i>
-              </div>
-              <h3 class="font-bold text-lg">Curated Experiential Events</h3>
-            </div>
-            <p class="text-gray-400 text-sm">
-              Private track days, factory tours, and driving experiences in extraordinary locations across the Philippines and beyond.
-            </p>
-          </div>
-
-          <div class="glass-panel p-8 rounded-2xl border border-white/10 hover:border-yellow-500/50 transition-colors scroll-reveal">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-500">
-                <i data-lucide="users" class="w-5 h-5"></i>
-              </div>
-              <h3 class="font-bold text-lg">The Aerie Forum</h3>
-            </div>
-            <p class="text-gray-400 text-sm">
-              Private digital community of Haribon owners. Share experiences, arrange meets, and access exclusive digital content.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-12 scroll-reveal">
-          <button
-            class="px-8 py-4 bg-gradient-to-r from-yellow-600 to-yellow-500 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-yellow-500/20 transition-all"
-          >
-            Join the Nest
-          </button>
-          <p class="mt-4 text-sm text-gray-500">Exclusively for Haribon owners</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Engineering Flow Section -->
-    <section id="engineering" class="py-32 bg-agila-dark relative overflow-hidden">
+    <!-- Manufacturing & Engineering -->
+    <section id="manufacturing" class="py-24 bg-slate-950 border-t border-white/10">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-20 scroll-reveal">
-          <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Engineering Synergy</h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">
-            Technology and innovation flow between our divisions, creating a continuous cycle of improvement.
-          </p>
+        <div class="text-center mb-16 scroll-reveal">
+          <h2 class="font-display text-4xl font-bold text-white mb-4">Integrated Manufacturing</h2>
+          <p class="text-slate-400">Four specialized facilities across Bulacan and Pampanga</p>
         </div>
 
-        <div class="relative">
-          <!-- Flow Diagram -->
-          <div class="grid md:grid-cols-3 gap-8 items-center">
-            <!-- Agila Core -->
-            <div class="glass-panel p-8 rounded-2xl border-2 border-agila-gold/50 text-center scroll-reveal relative">
-              <div class="w-16 h-16 bg-agila-gold rounded-full flex items-center justify-center mx-auto mb-4 text-agila-dark">
-                <i data-lucide="factory" class="w-8 h-8"></i>
-              </div>
-              <h3 class="font-display text-2xl font-bold mb-2 text-agila-gold">Agila Core</h3>
-              <p class="text-sm text-gray-400 mb-4">Robust Platform Development</p>
-              <div class="space-y-2 text-xs text-gray-500">
-                <div class="bg-white/5 py-2 rounded">Volume Testing</div>
-                <div class="bg-white/5 py-2 rounded">Efficiency Algorithms</div>
-                <div class="bg-white/5 py-2 rounded">Durability Data</div>
-              </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Bustos -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors scroll-reveal">
+            <div class="w-12 h-12 bg-cyan-950 rounded-lg flex items-center justify-center mb-4 text-cyan-400">
+              <i data-lucide="building-2" class="w-6 h-6"></i>
             </div>
-
-            <!-- Flow Arrows -->
-            <div class="hidden md:flex flex-col items-center justify-center gap-4 scroll-reveal">
-              <div class="flex items-center gap-2 text-haribon-silver">
-                <span class="text-xs uppercase tracking-wider">Capital & Data</span>
-                <i data-lucide="arrow-right" class="w-5 h-5 animate-pulse"></i>
-              </div>
-              <div class="h-px w-full bg-gradient-to-r from-agila-gold via-white to-haribon-silver"></div>
-              <div class="flex items-center gap-2 text-agila-gold">
-                <i data-lucide="arrow-left" class="w-5 h-5 animate-pulse"></i>
-                <span class="text-xs uppercase tracking-wider">Technology Trickle-down</span>
-              </div>
-            </div>
-
-            <!-- Haribon -->
-            <div class="glass-panel p-8 rounded-2xl border-2 border-haribon-silver/50 text-center scroll-reveal relative">
-              <div class="w-16 h-16 bg-haribon-silver rounded-full flex items-center justify-center mx-auto mb-4 text-haribon-midnight">
-                <i data-lucide="rocket" class="w-8 h-8"></i>
-              </div>
-              <h3 class="font-display text-2xl font-bold mb-2 text-haribon-silver">Haribon</h3>
-              <p class="text-sm text-gray-400 mb-4">Advanced R&D Lab</p>
-              <div class="space-y-2 text-xs text-gray-500">
-                <div class="bg-white/5 py-2 rounded">Material Science</div>
-                <div class="bg-white/5 py-2 rounded">Performance Tech</div>
-                <div class="bg-white/5 py-2 rounded">Aerodynamics</div>
-              </div>
-            </div>
+            <h3 class="font-bold text-white text-lg mb-2">Bustos Plant</h3>
+            <p class="text-xs text-cyan-400 uppercase tracking-wider mb-3">High-Volume Production</p>
+            <ul class="text-sm text-slate-400 space-y-2">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-cyan-500"></i>
+                Kalesa
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-cyan-500"></i>
+                GALAW II
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-cyan-500"></i>
+                Kilos Platform
+              </li>
+              <li class="mt-3 pt-3 border-t border-white/5 text-xs">PUSO3 & PUSO4 Engine Families</li>
+            </ul>
           </div>
 
-          <!-- Combined Effect -->
-          <div class="mt-16 text-center scroll-reveal">
-            <div class="inline-block glass-panel px-8 py-4 rounded-full border border-white/20">
-              <span class="text-gray-400">Combined Result:</span>
-              <span class="font-bold text-white ml-2">Filipino Engineering Excellence at Every Level</span>
+          <!-- Bulacan Main -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-agila-orange/50 transition-colors scroll-reveal">
+            <div class="w-12 h-12 bg-agila-orange/10 rounded-lg flex items-center justify-center mb-4 text-agila-orange">
+              <i data-lucide="factory" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-bold text-white text-lg mb-2">Bulacan Main</h3>
+            <p class="text-xs text-agila-orange uppercase tracking-wider mb-3">Volume & Low-Volume</p>
+            <ul class="text-sm text-slate-400 space-y-2">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-agila-orange"></i>
+                Sentro II
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-agila-orange"></i>
+                Ginoo II
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-agila-orange"></i>
+                Bagani II, Lakbay II
+              </li>
+              <li class="mt-3 pt-3 border-t border-white/5 text-xs">Tatag & Anim Powertrains</li>
+            </ul>
+          </div>
+
+          <!-- San Rafael -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-purple-500/50 transition-colors scroll-reveal">
+            <div class="w-12 h-12 bg-purple-950 rounded-lg flex items-center justify-center mb-4 text-purple-400">
+              <i data-lucide="gem" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-bold text-white text-lg mb-2">San Rafael Plant</h3>
+            <p class="text-xs text-purple-400 uppercase tracking-wider mb-3">Specialty Low-Volume</p>
+            <ul class="text-sm text-slate-400 space-y-2">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-purple-500"></i>
+                Lakan II
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-purple-500"></i>
+                500 Units/Year Cap
+              </li>
+              <li class="mt-3 pt-3 border-t border-white/5 text-xs">O8-TT V8 Engine Assembly</li>
+              <li class="text-xs">15% RHD Export Configuration</li>
+            </ul>
+          </div>
+
+          <!-- Haribon Center -->
+          <div
+            class="bg-gradient-to-br from-slate-900 to-haribon-midnight border border-haribon-cyan/30 rounded-xl p-6 hover:border-haribon-cyan transition-colors scroll-reveal"
+          >
+            <div class="w-12 h-12 bg-haribon-cyan/10 rounded-lg flex items-center justify-center mb-4 text-haribon-cyan">
+              <i data-lucide="rocket" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-bold text-white text-lg mb-2">Haribon Center</h3>
+            <p class="text-xs text-haribon-cyan uppercase tracking-wider mb-3">Clark | Performance & Luxury</p>
+            <ul class="text-sm text-slate-400 space-y-2">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-haribon-cyan"></i>
+                Sagwan S2, Habagat
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3 h-3 text-haribon-cyan"></i>
+                Matimtiman, AGILA MK2
+              </li>
+              <li class="mt-3 pt-3 border-t border-white/5 text-xs">KIDLAT, HALIKI6, DANGAL</li>
+              <li class="text-xs">Global LHD/RHD Production</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Engine Families -->
+        <div class="mt-16 bg-slate-900/50 rounded-2xl border border-white/10 p-8 scroll-reveal">
+          <h3 class="font-display text-2xl font-bold text-white mb-8 text-center">Powertrain Ecosystem</h3>
+          <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div>
+              <h4 class="text-agila-orange font-bold mb-3">PUSO Series</h4>
+              <p class="text-xs text-slate-500 mb-2">Core Volume Engines</p>
+              <div class="space-y-1 text-sm text-slate-400">
+                <div>P3T (3-Cylinder Turbo)</div>
+                <div>P4T18 (4-Cylinder)</div>
+              </div>
+              <div class="mt-3 text-[10px] uppercase tracking-wider text-slate-600">Bustos & Bulacan</div>
+            </div>
+            <div>
+              <h4 class="text-purple-400 font-bold mb-3">Tatag / Anim</h4>
+              <p class="text-xs text-slate-500 mb-2">Core Premium/Low-Volume</p>
+              <div class="space-y-1 text-sm text-slate-400">
+                <div>T4-T (4-Cylinder Turbo)</div>
+                <div>L5T (5-Cylinder)</div>
+                <div>AS6TT33 (6-Cyl TT)</div>
+              </div>
+              <div class="mt-3 text-[10px] uppercase tracking-wider text-slate-600">Bulacan Main</div>
+            </div>
+            <div>
+              <h4 class="text-haribon-cyan font-bold mb-3">KIDLAT / DANGAL</h4>
+              <p class="text-xs text-slate-500 mb-2">Haribon Performance</p>
+              <div class="space-y-1 text-sm text-slate-400">
+                <div>K4T-S/R (4-Cylinder Turbo)</div>
+                <div>H6-30T (6-Cylinder)</div>
+                <div>D12 (V12 Twin-Turbo)</div>
+              </div>
+              <div class="mt-3 text-[10px] uppercase tracking-wider text-slate-600">Haribon Center</div>
             </div>
           </div>
         </div>
@@ -611,134 +775,85 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-white/10 pt-20 pb-10">
+    <footer class="bg-black border-t border-white/10 pt-16 pb-8">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="grid md:grid-cols-4 gap-12 mb-16">
+        <div class="grid md:grid-cols-4 gap-12 mb-12">
           <div class="col-span-2">
             <div class="flex items-center gap-3 mb-6">
-              <div class="w-10 h-10 bg-gradient-to-br from-agila-gold to-agila-orange rounded-lg flex items-center justify-center">
+              <div class="w-10 h-10 bg-gradient-to-br from-agila-orange to-agila-gold rounded-lg flex items-center justify-center">
                 <i data-lucide="wing" class="w-6 h-6 text-white"></i>
               </div>
               <div>
-                <h3 class="font-display font-bold text-xl">AGILA</h3>
-                <p class="text-[10px] uppercase tracking-[0.3em] text-gray-500">Automotive Group</p>
+                <h3 class="font-display font-bold text-xl text-white">AGILA</h3>
+                <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500">Automotive Group</p>
               </div>
             </div>
-            <p class="text-gray-500 max-w-sm mb-6">
-              Filipino Engineering, Global Ambition. Building the Filipino Dream, on every scale, for the world.
+            <p class="text-slate-500 text-sm max-w-md">
+              Filipino Engineering, Global Ambition. Manufacturing excellence from Bustos high-volume to Clark performance mastery.
             </p>
-            <div class="flex gap-4">
-              <a
-                href="#"
-                class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-agila-gold hover:text-black transition-colors"
-              >
-                <i data-lucide="facebook" class="w-5 h-5"></i>
-              </a>
-              <a
-                href="#"
-                class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-agila-gold hover:text-black transition-colors"
-              >
-                <i data-lucide="instagram" class="w-5 h-5"></i>
-              </a>
-              <a
-                href="#"
-                class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-agila-gold hover:text-black transition-colors"
-              >
-                <i data-lucide="linkedin" class="w-5 h-5"></i>
-              </a>
-            </div>
           </div>
 
           <div>
-            <h4 class="font-bold mb-4 text-agila-gold">Agila Core</h4>
-            <ul class="space-y-2 text-sm text-gray-500">
-              <li><a href="#" class="hover:text-white transition-colors">Vehicle Lineup</a></li>
-              <li><a href="#" class="hover:text-white transition-colors">Test Drive</a></li>
-              <li><a href="#" class="hover:text-white transition-colors">Find a Dealer</a></li>
-              <li><a href="#" class="hover:text-white transition-colors">Service Centers</a></li>
+            <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wider">AGILA Core</h4>
+            <ul class="space-y-2 text-sm text-slate-500">
+              <li><a href="#" class="hover:text-agila-orange transition-colors">Kalesa (₱399K)</a></li>
+              <li><a href="#" class="hover:text-agila-orange transition-colors">GALAW II</a></li>
+              <li><a href="#" class="hover:text-agila-orange transition-colors">Sentro II</a></li>
+              <li><a href="#" class="hover:text-agila-orange transition-colors">Lakan II</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 class="font-bold mb-4 text-haribon-silver">Haribon</h4>
-            <ul class="space-y-2 text-sm text-gray-500">
-              <li><a href="#" class="hover:text-white transition-colors">Current Models</a></li>
-              <li><a href="#" class="hover:text-white transition-colors">Bespoke Commission</a></li>
-              <li><a href="#" class="hover:text-white transition-colors">The Nest</a></li>
-              <li><a href="#" class="hover:text-white transition-colors">Motorsport</a></li>
+            <h4 class="font-bold text-white mb-4 text-sm uppercase tracking-wider">Haribon</h4>
+            <ul class="space-y-2 text-sm text-slate-500">
+              <li><a href="#" class="hover:text-haribon-cyan transition-colors">Sagwan S2</a></li>
+              <li><a href="#" class="hover:text-haribon-cyan transition-colors">Habagat</a></li>
+              <li><a href="#" class="hover:text-haribon-cyan transition-colors">Matimtiman</a></li>
+              <li><a href="#" class="hover:text-yellow-500 transition-colors">AGILA MK2</a></li>
             </ul>
           </div>
         </div>
 
-        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p class="text-gray-600 text-sm">© 2024 Agila Automotive Group. All rights reserved.</p>
-          <div class="flex gap-6 text-sm text-gray-600">
-            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" class="hover:text-white transition-colors">Contact</a>
+        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-600">
+          <p>&copy; 2024 Agila Automotive Group. All rights reserved.</p>
+          <div class="flex gap-6">
+            <span>Bustos Plant</span>
+            <span>Bulacan Main</span>
+            <span>San Rafael</span>
+            <span class="text-haribon-cyan">Haribon Center</span>
           </div>
         </div>
       </div>
     </footer>
 
     <script>
-      // Initialize Lucide icons
       lucide.createIcons();
 
-      // Navbar scroll effect
-      const navbar = document.getElementById('navbar');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add('bg-agila-dark/90', 'backdrop-blur-md', 'border-white/10');
-          navbar.classList.remove('border-transparent');
-        } else {
-          navbar.classList.remove('bg-agila-dark/90', 'backdrop-blur-md', 'border-white/10');
-          navbar.classList.add('border-transparent');
-        }
-      });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
 
-      // Mobile menu toggle
-      function toggleMobileMenu() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
-      }
+      document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
 
-      // Smooth scroll
       function scrollToSection(id) {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-          // Close mobile menu if open
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
           document.getElementById('mobile-menu').classList.add('hidden');
         }
       }
 
-      // Scroll reveal animation
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1,
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
-
-      // Parallax effect for hero
-      window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallax = document.querySelectorAll('.animate-float');
-        parallax.forEach((el, index) => {
-          const speed = 0.5 + index * 0.1;
-          el.style.transform = `translateY(${scrolled * speed}px)`;
-        });
-      });
+      function toggleMobile() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+      }
     </script>
   </body>
 </html>
